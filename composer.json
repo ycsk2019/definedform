@@ -1,0 +1,30 @@
+{
+    "name": "lskstc/definedform",
+    "description": "a laravel package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "lskstc",
+            "email": "lskstc@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Lskstc\\Definedform\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lskstc\\Definedform\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lskstc\\Definedform\\AdminServiceProvider"
+            ]
+        }
+    }
+}
