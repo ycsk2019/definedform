@@ -27,5 +27,9 @@ class DefinedformServiceProvider extends ServiceProvider
         $this->app->singleton('definedform', function () {
             return new Definedform;
         });
+        $this->app->singleton('Lskstc\Definedform\Modules\Services\FormFormatServiceInterface', function()
+        {
+            return new Lskstc\Definedform\Modules\Services\FormFormatService();
+        });
     }
 }
