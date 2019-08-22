@@ -3,7 +3,7 @@
 
 namespace Lskstc\Definedform;
 
-use Lskstc\Definedform\Models\FormFormat;
+use Lskstc\Definedform\Modules\Models\FormFormat;
 
 
 class Definedform

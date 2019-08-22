@@ -1,6 +1,6 @@
 <?php
 
-namespace Lskstc\Definedform\Models;
+namespace Lskstc\Definedform\Modules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
