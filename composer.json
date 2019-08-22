@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Lskstc\\Definedform\\AdminServiceProvider"
+                "Lskstc\\Definedform\\DefinedformServiceProvider"
             ]
         }
     }
