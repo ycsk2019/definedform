@@ -31,5 +31,9 @@ class DefinedformServiceProvider extends ServiceProvider
         {
             return new \Lskstc\Definedform\Modules\Services\FormFormatService();
         });
+        $this->app->singleton('\Lskstc\Definedform\Modules\Services\FormFormatRepositoryInterface', function()
+        {
+            return new \Lskstc\Definedform\Modules\Services\FormFormatRepository();
+        });
     }
 }
