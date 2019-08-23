@@ -24,8 +24,8 @@ class DefinedformServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind(\Lskstc\Definedform\Modules\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Services\FormFormatService::class);
-        $this->app->bind(\Lskstc\Definedform\Modules\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Repositories\FormFormatRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Services\FormFormatService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Repositories\FormFormatRepository::class);
         /*$this->app->singleton('definedform', function () {
             return new Definedform;
         });
