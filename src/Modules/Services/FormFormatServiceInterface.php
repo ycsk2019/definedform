@@ -1,7 +1,0 @@
-<?php
-
-namespace Lskstc\Definedform\Modules\Services;
-
-interface FormFormatServiceInterface
-{
-}

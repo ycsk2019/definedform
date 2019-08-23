@@ -20,22 +20,30 @@ class DefinedformServiceProvider extends ServiceProvider
         /*$this->publishes([
             __DIR__.'/database/migrations/' => database_path('migrations')
         ], 'migrations');*/
+        $this->publishes([
+            __DIR__.'/Modules/Definedform/Repositories/FormFormatRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormFormatRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/Repositories/FormFormatRepository.php' => app_path('Modules/Definedform/Repositories/FormFormatRepository.php'),
+            __DIR__.'/Modules/Definedform/Services/FormFormatServiceInterface.php' => app_path('Modules/Definedform/Services/FormFormatServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/Services/FormFormatService.php' => app_path('Modules/Definedform/Services/FormFormatService.php')
+        ], 'repository');
     }
 
     public function register()
     {
-        $this->app->singleton(\Lskstc\Definedform\Modules\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Services\FormFormatService::class);
-        $this->app->singleton(\Lskstc\Definedform\Modules\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Repositories\FormFormatRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\FormFormatServiceInterface::class,\App\Modules\Definedform\Services\FormFormatService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormFormatRepository::class);
+        //$this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormFormatService::class);
+        //$this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepository::class);
         /*$this->app->singleton('definedform', function () {
             return new Definedform;
         });
-        $this->app->singleton('\Lskstc\Definedform\Modules\Services\FormFormatServiceInterface', function()
+        $this->app->singleton('\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface', function()
         {
-            return new \Lskstc\Definedform\Modules\Services\FormFormatService;
+            return new \Lskstc\Definedform\Modules\Definedform\Services\FormFormatService;
         });
-        $this->app->singleton('\Lskstc\Definedform\Modules\Services\FormFormatRepositoryInterface', function()
+        $this->app->singleton('\Lskstc\Definedform\Modules\Definedform\Services\FormFormatRepositoryInterface', function()
         {
-            return new \Lskstc\Definedform\Modules\Services\FormFormatRepository;
+            return new \Lskstc\Definedform\Modules\Definedform\Services\FormFormatRepository;
         });*/
 
     }
