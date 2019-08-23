@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Lskstc\Definedform\Modules\Definedform\Repositories;
+namespace App\Modules\Definedform\Repositories;
 
-use Lskstc\Definedform\Modules\Definedform\Models\FormFormat;
+use App\Modules\Definedform\Models\FormFormat;
 
 
 class FormFormatRepository implements FormFormatRepositoryInterface

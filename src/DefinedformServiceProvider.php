@@ -6,45 +6,93 @@ class DefinedformServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        //$this->loadRoutesFrom(__DIR__ . '/routes.php');
-        //$this->loadMigrationsFrom(__DIR__.'/database/migrations/');
-        /*if ($this->app->runningInConsole()) {
+        /*$this->loadRoutesFrom(__DIR__ . '/routes.php');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations/');
+        if ($this->app->runningInConsole()) {
             $this->commands([
                 DefinedformInstall::class
             ]);
-        }*/
-        
-        /*$this->publishes([
+        }
+        $this->publishes([
             __DIR__.'/config/definedform.php' => config_path('definedform.php'),
-        ], 'config');*/
-        /*$this->publishes([
+        ], 'config');
+        $this->publishes([
             __DIR__.'/database/migrations/' => database_path('migrations')
         ], 'migrations');*/
+
         $this->publishes([
-            __DIR__.'/Modules/Definedform/Repositories/FormFormatRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormFormatRepositoryInterface.php'),
-            __DIR__.'/Modules/Definedform/Repositories/FormFormatRepository.php' => app_path('Modules/Definedform/Repositories/FormFormatRepository.php'),
-            __DIR__.'/Modules/Definedform/Services/FormFormatServiceInterface.php' => app_path('Modules/Definedform/Services/FormFormatServiceInterface.php'),
-            __DIR__.'/Modules/Definedform/Services/FormFormatService.php' => app_path('Modules/Definedform/Services/FormFormatService.php')
-        ], 'repository');
+            __DIR__.'/Modules/Definedform/copy/Models/FormFormat.php' => app_path('Modules/Definedform/Models/FormFormat.php'),
+            __DIR__.'/Modules/Definedform/copy/Controllers/FormFormatController.php' => app_path('Modules/Definedform/Controllers/FormFormatController.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormFormatRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormFormatRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormFormatRepository.php' => app_path('Modules/Definedform/Repositories/FormFormatRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormFormatServiceInterface.php' => app_path('Modules/Definedform/Services/FormFormatServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormFormatService.php' => app_path('Modules/Definedform/Services/FormFormatService.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormField.php' => app_path('Modules/Definedform/Models/FormField.php'),
+            __DIR__.'/Modules/Definedform/copy/Controllers/FormFieldController.php' => app_path('Modules/Definedform/Controllers/FormFieldController.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormFieldRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormFieldRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormFieldRepository.php' => app_path('Modules/Definedform/Repositories/FormFieldRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormFieldServiceInterface.php' => app_path('Modules/Definedform/Services/FormFieldServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormFieldService.php' => app_path('Modules/Definedform/Services/FormFieldService.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormList.php' => app_path('Modules/Definedform/Models/FormList.php'),
+            __DIR__.'/Modules/Definedform/copy/Controllers/FormListController.php' => app_path('Modules/Definedform/Controllers/FormListController.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormListRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormListRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormListRepository.php' => app_path('Modules/Definedform/Repositories/FormListRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormListServiceInterface.php' => app_path('Modules/Definedform/Services/FormListServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormListService.php' => app_path('Modules/Definedform/Services/FormListService.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormLog.php' => app_path('Modules/Definedform/Models/FormLog.php'),
+            __DIR__.'/Modules/Definedform/copy/Controllers/FormLogController.php' => app_path('Modules/Definedform/Controllers/FormLogController.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormLogRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormLogRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormLogRepository.php' => app_path('Modules/Definedform/Repositories/FormLogRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormLogServiceInterface.php' => app_path('Modules/Definedform/Services/FormLogServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormLogService.php' => app_path('Modules/Definedform/Services/FormLogService.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormMenu.php' => app_path('Modules/Definedform/Models/FormMenu.php'),
+            __DIR__.'/Modules/Definedform/copy/Controllers/FormMenuController.php' => app_path('Modules/Definedform/Controllers/FormMenuController.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormMenuRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormMenuRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormMenuRepository.php' => app_path('Modules/Definedform/Repositories/FormMenuRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormMenuServiceInterface.php' => app_path('Modules/Definedform/Services/FormMenuServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormMenuService.php' => app_path('Modules/Definedform/Services/FormMenuService.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormListHead.php' => app_path('Modules/Definedform/Models/FormListHead.php'),
+            __DIR__.'/Modules/Definedform/copy/Controllers/FormListHeadController.php' => app_path('Modules/Definedform/Controllers/FormListHeadController.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormListHeadRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormListHeadRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/FormListHeadRepository.php' => app_path('Modules/Definedform/Repositories/FormListHeadRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormListHeadServiceInterface.php' => app_path('Modules/Definedform/Services/FormListHeadServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/FormListHeadService.php' => app_path('Modules/Definedform/Services/FormListHeadService.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormMenuProcess.php' => app_path('Modules/Definedform/Models/FormMenuProcess.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/Order.php' => app_path('Modules/Definedform/Models/Order.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/Process.php' => app_path('Modules/Definedform/Models/Process.php'),
+            __DIR__.'/Modules/Definedform/copy/Controllers/OrderController.php' => app_path('Modules/Definedform/Controllers/OrderController.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/OrderService.php' => app_path('Modules/Definedform/Services/OrderService.php'),
+            __DIR__.'/Modules/Definedform/copy/Helpers/ApiResponse.php' => app_path('Modules/Definedform/Helpers/ApiResponse.php'),
+            __DIR__.'/Modules/Definedform/copy/Helpers/Util.php' => app_path('Modules/Definedform/Helpers/Util.php')
+        ], 'definedform');
     }
 
     public function register()
     {
         $this->app->singleton(\App\Modules\Definedform\Services\FormFormatServiceInterface::class,\App\Modules\Definedform\Services\FormFormatService::class);
         $this->app->singleton(\App\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormFormatRepository::class);
-        //$this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormFormatService::class);
-        //$this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepository::class);
-        /*$this->app->singleton('definedform', function () {
-            return new Definedform;
-        });
-        $this->app->singleton('\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface', function()
-        {
-            return new \Lskstc\Definedform\Modules\Definedform\Services\FormFormatService;
-        });
-        $this->app->singleton('\Lskstc\Definedform\Modules\Definedform\Services\FormFormatRepositoryInterface', function()
-        {
-            return new \Lskstc\Definedform\Modules\Definedform\Services\FormFormatRepository;
-        });*/
+        $this->app->singleton(\App\Modules\Definedform\Services\FormFieldServiceInterface::class,\App\Modules\Definedform\Services\FormFieldService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\FormFieldRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormFieldRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\FormListServiceInterface::class,\App\Modules\Definedform\Services\FormListService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\FormListRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormListRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\FormLogServiceInterface::class,\App\Modules\Definedform\Services\FormLogService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\FormLogRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormLogRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\FormMenuServiceInterface::class,\App\Modules\Definedform\Services\FormMenuService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\FormMenuRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormMenuRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\FormListHeadServiceInterface::class,\App\Modules\Definedform\Services\FormListHeadService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\FormListHeadRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormListHeadRepository::class);
 
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormFormatService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormFieldServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormFieldService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFieldRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFieldRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormListServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormListService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormListRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormListRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormLogServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormLogService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormLogRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormLogRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormMenuServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormMenuService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormMenuRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormMenuRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormListHeadServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormListHeadService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormListHeadRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormListHeadRepository::class);
     }
 }

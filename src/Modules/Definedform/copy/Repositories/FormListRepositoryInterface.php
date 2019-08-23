@@ -1,8 +1,10 @@
 <?php
 
-namespace Lskstc\Definedform\Modules\Definedform\Repositories;
 
-interface FormFormatRepositoryInterface
+namespace App\Modules\Definedform\Repositories;
+
+
+interface FormListRepositoryInterface
 {
     public function all($columns = ['*']);    //获取所有记录
 
@@ -29,4 +31,6 @@ interface FormFormatRepositoryInterface
     public function findFirstBy($field, $value, $columns = ['*']);    //按指定字段查找第一条
 
     public function findFirstWhere($where, $columns = ['*']);    //按多个条件查找第一条
+
+    public function insert(array $data);    //创建批量记录
 }

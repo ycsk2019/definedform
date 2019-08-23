@@ -1,6 +1,6 @@
 <?php
 
-namespace Lskstc\Definedform\Modules\Definedform\Repositories;
+namespace App\Modules\Definedform\Repositories;
 
 interface FormFormatRepositoryInterface
 {

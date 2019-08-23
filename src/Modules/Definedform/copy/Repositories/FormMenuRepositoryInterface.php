@@ -1,8 +1,10 @@
 <?php
 
-namespace Lskstc\Definedform\Modules\Definedform\Repositories;
 
-interface FormFormatRepositoryInterface
+namespace App\Modules\Definedform\Repositories;
+
+
+interface FormMenuRepositoryInterface
 {
     public function all($columns = ['*']);    //获取所有记录
 

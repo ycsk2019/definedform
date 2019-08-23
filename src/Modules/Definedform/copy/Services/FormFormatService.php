@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Lskstc\Definedform\Modules\Definedform\Services;
+namespace App\Modules\Definedform\Services;
 
 
-use Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface;
+use App\Modules\Definedform\Repositories\FormFormatRepositoryInterface;
 use Illuminate\Support\Facades\DB;
-use Lskstc\Definedform\Modules\Definedform\Helpers\Util;
+use App\Modules\Definedform\Helpers\Util;
 
 class FormFormatService implements FormFormatServiceInterface
 {

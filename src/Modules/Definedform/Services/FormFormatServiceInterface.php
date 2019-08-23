@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Definedform\Services;
+namespace Lskstc\Definedform\Modules\Definedform\Services;
 
 interface FormFormatServiceInterface
 {
