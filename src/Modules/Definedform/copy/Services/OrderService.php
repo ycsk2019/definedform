@@ -4,8 +4,9 @@
 namespace App\Modules\Definedform\Services;
 
 use App\Modules\Definedform\Repositories\OrderRepositoryInterface;
+use App\Modules\Definedform\Services\OrderServiceInterface;
 
-class OrderService
+class OrderService implements OrderServiceInterface
 {
     protected $orderRepository;
 

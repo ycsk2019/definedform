@@ -3,9 +3,10 @@
 
 namespace Lskstc\Definedform\Modules\Definedform\Services;
 
+use Lskstc\Definedform\Modules\Definedform\Services\OrderServiceInterface;
 use Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepositoryInterface;
 
-class OrderService
+class OrderService implements OrderServiceInterface
 {
     protected $orderRepository;
 
