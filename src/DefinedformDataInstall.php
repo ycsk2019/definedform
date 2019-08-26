@@ -19,7 +19,7 @@ class DefinedformDataInstall extends Command
      *
      * @var string
      */
-    protected $description = '自定义表单数据库';
+    protected $description = '导入自定义表单数据库数据';
 
     /**
      * Create a new command instance.
