@@ -58,9 +58,12 @@ class DefinedformServiceProvider extends ServiceProvider
             __DIR__.'/Modules/Definedform/copy/Services/FormListHeadServiceInterface.php' => app_path('Modules/Definedform/Services/FormListHeadServiceInterface.php'),
             __DIR__.'/Modules/Definedform/copy/Services/FormListHeadService.php' => app_path('Modules/Definedform/Services/FormListHeadService.php'),
             __DIR__.'/Modules/Definedform/copy/Models/FormMenuProcess.php' => app_path('Modules/Definedform/Models/FormMenuProcess.php'),
-            __DIR__.'/Modules/Definedform/copy/Models/Order.php' => app_path('Modules/Definedform/Models/Order.php'),
             __DIR__.'/Modules/Definedform/copy/Models/Process.php' => app_path('Modules/Definedform/Models/Process.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/Order.php' => app_path('Modules/Definedform/Models/Order.php'),
             __DIR__.'/Modules/Definedform/copy/Controllers/OrderController.php' => app_path('Modules/Definedform/Controllers/OrderController.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/OrderRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/OrderRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/OrderRepository.php' => app_path('Modules/Definedform/Repositories/OrderRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/OrderServiceInterface.php' => app_path('Modules/Definedform/Services/OrderServiceInterface.php'),
             __DIR__.'/Modules/Definedform/copy/Services/OrderService.php' => app_path('Modules/Definedform/Services/OrderService.php'),
             __DIR__.'/Modules/Definedform/copy/Helpers/ApiResponse.php' => app_path('Modules/Definedform/Helpers/ApiResponse.php'),
             __DIR__.'/Modules/Definedform/copy/Helpers/Util.php' => app_path('Modules/Definedform/Helpers/Util.php')
@@ -81,6 +84,8 @@ class DefinedformServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Modules\Definedform\Repositories\FormMenuRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormMenuRepository::class);
         $this->app->singleton(\App\Modules\Definedform\Services\FormListHeadServiceInterface::class,\App\Modules\Definedform\Services\FormListHeadService::class);
         $this->app->singleton(\App\Modules\Definedform\Repositories\FormListHeadRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormListHeadRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\OrderServiceInterface::class,\App\Modules\Definedform\Services\OrderService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\OrderRepositoryInterface::class,\App\Modules\Definedform\Repositories\OrderRepository::class);
 
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormFormatService::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepository::class);
@@ -94,5 +99,7 @@ class DefinedformServiceProvider extends ServiceProvider
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormMenuRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormMenuRepository::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormListHeadServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormListHeadService::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormListHeadRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormListHeadRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\OrderServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\OrderService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepository::class);
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
 
-namespace Lskstc\Definedform\Modules\Definedform\Controllers;
+namespace App\Modules\Definedform\Controllers;
 
 
-use Lskstc\Definedform\Modules\Definedform\Helpers\ApiResponse;
-use Lskstc\Definedform\Modules\Definedform\Services\OrderService;
+use App\Helpers\ApiResponse;
+use App\Modules\Services\OrderServiceInterface;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     protected $orderService;
 
-    public function __construct(OrderService $orderService)
+    public function __construct(OrderServiceInterface $orderService)
     {
         $this->orderService = $orderService;
     }

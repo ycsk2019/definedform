@@ -5,14 +5,14 @@ namespace App\Modules\Definedform\Controllers;
 
 
 use App\Modules\Definedform\Helpers\ApiResponse;
-use App\Modules\Definedform\Services\OrderService;
+use App\Modules\Definedform\Services\OrderServiceInterface;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     protected $orderService;
 
-    public function __construct(OrderService $orderService)
+    public function __construct(OrderServiceInterface $orderService)
     {
         $this->orderService = $orderService;
     }
