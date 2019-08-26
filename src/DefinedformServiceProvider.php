@@ -21,7 +21,8 @@ class DefinedformServiceProvider extends ServiceProvider
         ], 'migrations');*/
 
         $this->commands([
-            DefinedformInstall::class
+            DefinedformInstall::class,
+            DefinedformDataInstall::class
         ]);
 
         $this->publishes([

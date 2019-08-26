@@ -38,7 +38,6 @@ class DefinedformInstall extends Command
      */
     public function handle()
     {
-        $sql       = dirname(__DIR__) . '/sql/definedform.sql';
         $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormFormat();
         $tableName = $model->getTable();
         if (Schema::hasTable($tableName)) {
@@ -74,6 +73,7 @@ class DefinedformInstall extends Command
         if (Schema::hasTable($tableName)) {
             dd("{$tableName}表已经存在");
         }
+        $sql       = dirname(__DIR__) . '/sql/definedform_structure.sql';
         DB::unprepared(file_get_contents($sql));
     }
 }
