@@ -44,6 +44,36 @@ class DefinedformInstall extends Command
         if (Schema::hasTable($tableName)) {
             dd("{$tableName}表已经存在");
         }
+        $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormMenu();
+        $tableName = $model->getTable();
+        if (Schema::hasTable($tableName)) {
+            dd("{$tableName}表已经存在");
+        }
+        $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormListHead();
+        $tableName = $model->getTable();
+        if (Schema::hasTable($tableName)) {
+            dd("{$tableName}表已经存在");
+        }
+        $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormList();
+        $tableName = $model->getTable();
+        if (Schema::hasTable($tableName)) {
+            dd("{$tableName}表已经存在");
+        }
+        $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormField();
+        $tableName = $model->getTable();
+        if (Schema::hasTable($tableName)) {
+            dd("{$tableName}表已经存在");
+        }
+        $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormLog();
+        $tableName = $model->getTable();
+        if (Schema::hasTable($tableName)) {
+            dd("{$tableName}表已经存在");
+        }
+        $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormMenuProcess();
+        $tableName = $model->getTable();
+        if (Schema::hasTable($tableName)) {
+            dd("{$tableName}表已经存在");
+        }
         DB::unprepared(file_get_contents($sql));
     }
 }
