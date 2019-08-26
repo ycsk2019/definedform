@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 26/08/2019 11:33:21
+ Date: 26/08/2019 16:53:36
 */
 
 SET NAMES utf8mb4;
@@ -129,6 +129,26 @@ CREATE TABLE `form_menus`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for form_orders
+-- ----------------------------
+DROP TABLE IF EXISTS `form_orders`;
+CREATE TABLE `form_orders`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '订单号',
+  `audit_user_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '认领 处理人id',
+  `pick_up_status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT ' 认领状态 1 未认领 2 认领',
+  `customer_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '客户 id 关联 v2_customer 表',
+  `apply_time` datetime(0) NULL DEFAULT NULL COMMENT '申请时间 本来是订单创建时间的 不利于后期 添加 暂存之类的功能',
+  `status_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '状态 id',
+  `form_log_id` int(11) NOT NULL DEFAULT 0 COMMENT '表单格式ID',
+  `company_id` int(11) NOT NULL DEFAULT 0 COMMENT '关联的公司ID',
+  `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for form_system_fields
