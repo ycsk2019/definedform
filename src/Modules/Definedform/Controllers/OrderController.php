@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Modules\Definedform\Controllers;
+namespace Lskstc\Definedform\Modules\Definedform\Controllers;
 
 
 use App\Helpers\ApiResponse;
