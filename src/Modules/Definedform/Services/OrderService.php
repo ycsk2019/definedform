@@ -9,7 +9,7 @@ class OrderService
 {
     protected $orderRepository;
 
-    public function __construct(OrderRepositoryInterface)
+    public function __construct(OrderRepositoryInterface $orderRepository)
     {
         $this->orderRepository = $orderRepository;
     }
