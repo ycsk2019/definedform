@@ -20,6 +20,10 @@ class DefinedformServiceProvider extends ServiceProvider
             __DIR__.'/database/migrations/' => database_path('migrations')
         ], 'migrations');*/
 
+        $this->commands([
+            DefinedformInstall::class
+        ]);
+
         $this->publishes([
             __DIR__.'/Modules/Definedform/copy/Models/FormFormat.php' => app_path('Modules/Definedform/Models/FormFormat.php'),
             __DIR__.'/Modules/Definedform/copy/Controllers/FormFormatController.php' => app_path('Modules/Definedform/Controllers/FormFormatController.php'),
