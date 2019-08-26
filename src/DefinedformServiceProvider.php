@@ -40,7 +40,6 @@ class DefinedformServiceProvider extends ServiceProvider
             __DIR__.'/Modules/Definedform/copy/Services/FormListServiceInterface.php' => app_path('Modules/Definedform/Services/FormListServiceInterface.php'),
             __DIR__.'/Modules/Definedform/copy/Services/FormListService.php' => app_path('Modules/Definedform/Services/FormListService.php'),
             __DIR__.'/Modules/Definedform/copy/Models/FormLog.php' => app_path('Modules/Definedform/Models/FormLog.php'),
-            __DIR__.'/Modules/Definedform/copy/Controllers/FormLogController.php' => app_path('Modules/Definedform/Controllers/FormLogController.php'),
             __DIR__.'/Modules/Definedform/copy/Repositories/FormLogRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/FormLogRepositoryInterface.php'),
             __DIR__.'/Modules/Definedform/copy/Repositories/FormLogRepository.php' => app_path('Modules/Definedform/Repositories/FormLogRepository.php'),
             __DIR__.'/Modules/Definedform/copy/Services/FormLogServiceInterface.php' => app_path('Modules/Definedform/Services/FormLogServiceInterface.php'),
