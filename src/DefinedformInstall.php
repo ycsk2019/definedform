@@ -38,8 +38,8 @@ class DefinedformInstall extends Command
      */
     public function handle()
     {
-        $sql       = dirname(__DIR__) . '/sql/workflow.sql';
-        $model     = new \Yiche\Workflow\Models\Process();
+        $sql       = dirname(__DIR__) . '/sql/definedform.sql';
+        $model     = new \Lskstc\Definedform\Modules\Definedform\Models\FormFormat();
         $tableName = $model->getTable();
         if (Schema::hasTable($tableName)) {
             dd("{$tableName}表已经存在");
