@@ -4,8 +4,8 @@
 namespace Lskstc\Definedform\Modules\Definedform\Controllers;
 
 
-use App\Helpers\ApiResponse;
-use App\Modules\Services\OrderServiceInterface;
+use Lskstc\Definedform\Modules\Definedform\Helpers\ApiResponse;
+use Lskstc\Definedform\Modules\Definedform\Services\OrderServiceInterface;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller

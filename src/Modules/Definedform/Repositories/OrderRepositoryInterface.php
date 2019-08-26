@@ -16,7 +16,7 @@ interface OrderRepositoryInterface
 
     public function delete($id);    //删除一条记录
 
-    public function update(array $data, $id);    //更新记录
+    public function update(array $data);    //更新记录
 
     public function updateBy(array $data, $field, $value, $columns = ['*']);     //按指定字段更新记录
 
