@@ -5,7 +5,6 @@ namespace App\Modules\Definedform\Controllers;
 use App\Modules\Definedform\Services\FormFormatServiceInterface;
 use Illuminate\Http\Request;
 use App\Modules\Definedform\Helpers\ApiResponse;
-use Lskstc\Definedform\Definedform;
 
 class FormFormatController extends Controller
 {
@@ -22,10 +21,7 @@ class FormFormatController extends Controller
      * @return list
      */
     public function index(){
-        //$result = $this->formFormatService->all();
-        Definedform::printRunning();
-        $definedform = new Definedform();
-        $result = $definedform->all();
+        $result = $this->formFormatService->all();
         ApiResponse::output($result);
     }
 
