@@ -16,7 +16,7 @@ class FormList extends Model
     protected $dates = ['deleted_at'];
 
     /**
-     * »ñµÃ´ËÁÐ±íÏî¹ØÁªµÄ±íµ¥Ä£°å
+     * èŽ·å¾—æ­¤åˆ—è¡¨é¡¹å…³è”çš„è¡¨å•æ¨¡æ¿
      */
     public function form_format(){
         return $this->belongsToMany('App\Models\FormFormat')->withPivot('field_no', 'field_label', 'form_name_cn');
