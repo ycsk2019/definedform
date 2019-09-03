@@ -73,7 +73,9 @@ class DefinedformServiceProvider extends ServiceProvider
             __DIR__.'/Modules/Definedform/copy/Helpers/ApiResponse.php' => app_path('Modules/Definedform/Helpers/ApiResponse.php'),
             __DIR__.'/Modules/Definedform/copy/Helpers/Util.php' => app_path('Modules/Definedform/Helpers/Util.php'),
             __DIR__.'/Modules/Definedform/copy/Controllers/Controller.php' => app_path('Modules/Definedform/Controllers/Controller.php'),
-            __DIR__.'/Modules/Definedform/copy/Routes/definedform.php' => base_path('routes/definedform.php')
+            __DIR__.'/Modules/Definedform/copy/Routes/definedform.php' => base_path('routes/definedform.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormFormatFormList.php' => app_path('Modules/Definedform/Models/FormFormatFormList.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/FormSystemField.php' => app_path('Modules/Definedform/Models/FormSystemField.php')
         ], 'definedform');
     }
 

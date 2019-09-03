@@ -16,6 +16,8 @@ Route::prefix('definedform')->group(function () {
         Route::post('findByFieldText', \App\Modules\Definedform\Controllers\OrderController::class . '@findByFieldText');
         //    根据菜单ID查找列表
         Route::post('findByMenuId', \App\Modules\Definedform\Controllers\OrderController::class . '@findByMenuId');
+	//    根据菜单ID和搜索项查找列表
+    	Route::post('lists', \App\Modules\Definedform\Controllers\OrderController::class . '@lists');
     });
 
     // 表单
@@ -54,14 +56,18 @@ Route::prefix('definedform')->group(function () {
         Route::get('detail', \App\Modules\Definedform\Controllers\FormListController::class . '@detail');
         //    新增
         Route::post('create', \App\Modules\Definedform\Controllers\FormListController::class . '@create');
+
+    	//    修改
+    	Route::post('update', \App\Modules\Definedform\Controllers\FormListController::class . '@update');
         //    根据菜单ID查找列表
         Route::post('findByMenuId', \App\Modules\Definedform\Controllers\FormListController::class . '@findByMenuId');
-        //    批量新增
-        Route::post('createMulti', \App\Modules\Definedform\Controllers\FormListController::class . '@createMulti');
-        //    批量修改
-        Route::post('updateMulti', \App\Modules\Definedform\Controllers\FormListController::class . '@updateMulti');
-        //    删除
+        
+	//    删除
         Route::post('delete', \App\Modules\Definedform\Controllers\FormListController::class . '@delete');
+	    //    系统字段列表
+    	Route::get('formSystemFieldList', \App\Modules\Definedform\Controllers\FormListController::class . '@formSystemFieldList');
+    	//    查找搜索字段
+    	Route::get('findSearchFieldByMenuId', \App\Modules\Definedform\Controllers\FormListController::class . '@findSearchFieldByMenuId');
     });
 
     // 表单列表头设计
