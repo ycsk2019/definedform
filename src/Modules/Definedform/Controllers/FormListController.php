@@ -35,7 +35,7 @@ class FormListController extends Controller
      * @return
      */
     public function detail(Request $request){
-        $result = $this->formListService->find($request->input('id'));
+        $result = $this->formListService->findAttach($request->input('id'));
         ApiResponse::output($result);
     }
 
@@ -45,8 +45,18 @@ class FormListController extends Controller
      */
     public function create(Request $request)
     {
+        //TODO 创建和修改时都需要修改菜单和表单模板关联关系
+        $this->validate($request, [
+            'menu_id' => "int|required",
+            'type' => "string|required",
+            'item_order' => "int|required",
+            'system_field_id' => "int",
+            'searchable' => "int|required|between:1,2",
+            'form_format_ids' => "array|required"
+        ]);
         $input = $request->input();
-        $result = $this->formListService->create($input);
+        $form_format_ids = $input['form_format_ids'];
+        $result = $this->formListService->createAttach($input,$form_format_ids);
         ApiResponse::output($result);
     }
 
@@ -56,11 +66,18 @@ class FormListController extends Controller
      */
     public function update(Request $request)
     {
-        /*$this->validate($request, [
-            'form_no' => "string|required"
-        ]);*/
+        $this->validate($request, [
+            'id' => "int|required",
+            'menu_id' => "int|required",
+            'type' => "string|required",
+            'item_order' => "int|required",
+            'system_field_id' => "int",
+            'searchable' => "int|required|between:1,2",
+            'form_format_ids' => "array|required"
+        ]);
         $input = $request->input();
-        $result = $this->formListService->update($input);
+        $form_format_ids = $input['form_format_ids'];
+        $result = $this->formListService->updateAttach($input,$input['id'],$form_format_ids);
         ApiResponse::output($result);
     }
 
@@ -74,11 +91,8 @@ class FormListController extends Controller
         $this->validate($request, [
             'menu_id' => "int|required"
         ]);
-        $list = $this->formListService->findByMenuId($request->input('menu_id'));
-        foreach ($list as $k => $v){
-            $list[$k]->form_name_cn = $this->formFormatService->find($v->form_format_id,array('form_name_cn'))->form_name_cn;
-        }
-
+        $list = $this->formListService->findAttachByMenuId($request->input('menu_id'));
+        //$list = $this->formListService->findLogIdByMenuId($request->input('menu_id'));
         return $list;
     }
 
@@ -114,7 +128,27 @@ class FormListController extends Controller
             'id' => "int|required"
         ]);
         $input = $request->input();
-        $result = $this->formListService->delete($input['id']);
+        $result = $this->formListService->deleteAttach($input['id']);
+        ApiResponse::output($result);
+    }
+
+    /**
+     * 查询系统字段列表
+     *
+     * @return list
+     */
+    public function formSystemFieldList(){
+        $result = $this->formListService->formSystemFieldList();
+        ApiResponse::output($result);
+    }
+
+    /**
+     * 查找搜索字段
+     *
+     * @return list
+     */
+    public function findSearchFieldByMenuId(Request $request){
+        $result = $this->formListService->findSearchFieldByMenuId($request->input("menu_id"));
         ApiResponse::output($result);
     }
 }

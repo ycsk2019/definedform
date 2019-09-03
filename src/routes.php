@@ -15,6 +15,8 @@ Route::prefix('definedformsrc')->group(function () {
         Route::post('findByFieldText', \Lskstc\Definedform\Modules\Definedform\Controllers\OrderController::class . '@findByFieldText');
         //    根据菜单ID查找列表
         Route::post('findByMenuId', \Lskstc\Definedform\Modules\Definedform\Controllers\OrderController::class . '@findByMenuId');
+	//    根据菜单ID和搜索项查找列表
+    	Route::post('lists', 'OrderController@lists');
     });
 
     // 表单
@@ -53,14 +55,17 @@ Route::prefix('definedformsrc')->group(function () {
         Route::get('detail', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@detail');
         //    新增
         Route::post('create', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@create');
+
+    	//    修改
+    	Route::post('update', 'FormListController@update');
         //    根据菜单ID查找列表
         Route::post('findByMenuId', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@findByMenuId');
-        //    批量新增
-        Route::post('createMulti', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@createMulti');
-        //    批量修改
-        Route::post('updateMulti', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@updateMulti');
         //    删除
         Route::post('delete', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@delete');
+	//    系统字段列表
+    	Route::get('formSystemFieldList', 'FormListController@formSystemFieldList');
+    	//    查找搜索字段
+    	Route::get('findSearchFieldByMenuId', 'FormListController@findSearchFieldByMenuId');
     });
 
     // 表单列表头设计

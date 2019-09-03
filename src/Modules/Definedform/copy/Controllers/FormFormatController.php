@@ -20,8 +20,14 @@ class FormFormatController extends Controller
      *
      * @return list
      */
-    public function index(){
-        $result = $this->formFormatService->all();
+    public function index(Request $request){
+        $this->validate($request, [
+            'form_no' => "string",
+            'form_name_cn' => "string",
+            'company_id' => "int|required"
+        ]);
+        $input = $request->input();
+        $result = $this->formFormatService->findWhere($input);
         ApiResponse::output($result);
     }
 

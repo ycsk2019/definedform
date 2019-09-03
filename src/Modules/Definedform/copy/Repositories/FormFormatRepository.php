@@ -68,21 +68,31 @@ class FormFormatRepository implements FormFormatRepositoryInterface
         return FormFormat::select($columns)->where($field,$value)->get();
     }
 
-    public function findWhere($where, $columns = ['*'],$orderBy = '',$groupBy = '')
+    public function findWhere($data, $columns = ['*'],$orderBy = '',$groupBy = '')
     {
         if ($orderBy){
             if ($groupBy){
-                $formFormat = FormFormat::select($columns)->where($where)->orderBy($orderBy)->groupBy($groupBy)->get();
+                $formFormat = FormFormat::select($columns)->where($data)->orderBy($orderBy)->groupBy($groupBy)->get();
             }
             else{
-                $formFormat = FormFormat::select($columns)->where($where)->orderBy($orderBy)->get();
+                $formFormat = FormFormat::select($columns)->where($data)->orderBy($orderBy)->get();
             }
         }
         else{
             if ($groupBy){
-                $formFormat = FormFormat::select($columns)->where($where)->groupBy($groupBy)->get();
+                $formFormat = FormFormat::select($columns)->where($data)->groupBy($groupBy)->get();
             }
             else{
+                $where = array();
+                if (isset($data['company_id']) && !empty($data['company_id'])){
+                    $where[] = ['company_id', '=', $data['company_id']];
+                }
+                if (isset($data['form_no']) && !empty($data['form_no'])){
+                    $where[] = ['form_no', '=', $data['form_no']];
+                }
+                if (isset($data['form_name_cn']) && !empty($data['form_name_cn'])){
+                    $where[] = ['form_name_cn', 'like', '%'.$data['form_name_cn'].'%'];
+                }
                 $formFormat = FormFormat::select($columns)->where($where)->get();
             }
         }

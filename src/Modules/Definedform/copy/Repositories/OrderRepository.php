@@ -211,7 +211,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function findWhere($where, $columns = ['*'])
     {
-        // TODO: Implement findWhere() method.
+        return Order::with('form_logs')->select($columns)->where($where)->get();
     }
 
     public function findFirstBy($field, $value, $columns = ['*'])
@@ -222,5 +222,40 @@ class OrderRepository implements OrderRepositoryInterface
     public function findFirstWhere($where, $columns = ['*'])
     {
         // TODO: Implement findFirstWhere() method.
+    }
+
+    public function findByLogIds($log_ids, $columns = ['*'])
+    {
+        return Order::with('form_logs')->select($columns)->whereIn('form_log_id', $log_ids)->get();
+    }
+
+    public function findByLogIdsSearch($log_ids,$search_data, $page = 1, $size = 20, $columns = ['*'])
+    {
+        if (count($search_data) > 0){
+            $i = 0;
+            foreach($search_data as $k => $v){
+                if($i == 0){
+                    $whereRaw = "JSON_CONTAINS( form_logs.form_info, '\\\"{$v}\\\"', '$.{$k}' )";
+                }
+                else{
+                    $whereRaw = $whereRaw . " AND JSON_CONTAINS( form_logs.form_info, '\\\"{$v}\\\"', '$.{$k}' )";
+                }
+                $i ++;
+            }
+            return DB::table('form_orders')
+                ->join('form_logs', 'form_orders.id', '=', 'form_logs.order_id')
+                ->select('form_orders.*', 'form_logs.form_info')
+                ->whereIn('form_log_id', $log_ids)
+                ->whereRaw($whereRaw)
+                ->paginate($size,['*'], 'page', $page);
+        }
+        else{
+            return DB::table('form_orders')
+                ->join('form_logs', 'form_orders.id', '=', 'form_logs.order_id')
+                ->select('form_orders.*', 'form_logs.form_info')
+                ->whereIn('form_log_id', $log_ids)
+                ->paginate($size,['*'], 'page', $page);
+        }
+
     }
 }

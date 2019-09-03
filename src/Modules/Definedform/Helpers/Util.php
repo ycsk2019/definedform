@@ -153,7 +153,7 @@ class Util
         //订购日期
         $order_date = date('Y-m-d');
         //订单号码主体（YYYYMMDDHHIISSNNNNNNNN）
-        $order_id_main = date('YmdHis') . rand(10000000,99999999);
+        $order_id_main = date('YmdHis') . rand(10,99);
         //订单号码主体长度
         $order_id_len = strlen($order_id_main);
         $order_id_sum = 0;

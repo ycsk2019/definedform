@@ -80,7 +80,7 @@ class FormMenuController extends Controller
     }
 
     /**
-     * 更新表单菜单设计
+     * 删除表单菜单设计
      *
      */
     public function delete(Request $request)

@@ -19,8 +19,8 @@ class FormFormatService implements FormFormatServiceInterface
         $this->formFormatRepository = $formFormatRepository;
     }
 
-    public function all(){
-        return $this->formFormatRepository->all();
+    public function all($data){
+        return $this->formFormatRepository->all($data);
     }
 
     public function find($id, $columns = ['*'])
@@ -31,6 +31,7 @@ class FormFormatService implements FormFormatServiceInterface
     public function create(array $data)
     {
         $data['form_no'] = Util::random_order_id();
+        $data['is_new'] = $this->flag_is_new;
         return $this->formFormatRepository->create($data);
     }
 

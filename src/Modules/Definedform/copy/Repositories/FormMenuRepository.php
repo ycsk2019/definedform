@@ -90,7 +90,7 @@ class FormMenuRepository implements FormMenuRepositoryInterface
     {
         $form_menu = FormMenu::find($id);
         $r_update = $form_menu->update($data);
-        $r = $form_menu->process()->sync([2,3]);
+        $r = $form_menu->process()->sync($process_ids);
         return $form_menu;
     }
 

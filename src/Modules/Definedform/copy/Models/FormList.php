@@ -14,4 +14,11 @@ class FormList extends Model
     protected $guarded = ['id'];
 
     protected $dates = ['deleted_at'];
+
+    /**
+     * 获得此列表项关联的表单模板
+     */
+    public function form_format(){
+        return $this->belongsToMany('App\Models\FormFormat')->withPivot('field_no', 'field_label', 'form_name_cn');
+    }
 }

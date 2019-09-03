@@ -4,6 +4,8 @@
 namespace Lskstc\Definedform\Modules\Definedform\Repositories;
 
 use Lskstc\Definedform\Modules\Definedform\Models\FormList;
+use Lskstc\Definedform\Modules\Definedform\Models\FormFormatFormList;
+use Lskstc\Definedform\Modules\Definedform\Models\FormSystemField;
 
 class FormListRepository implements FormListRepositoryInterface
 {
@@ -81,5 +83,137 @@ class FormListRepository implements FormListRepositoryInterface
     public function insert(array $data)
     {
         return FormList::insert($data);
+    }
+
+    public function createAttach(array $data,array $form_format_ids)
+    {
+        $form_list = FormList::create($data);
+        $r = $form_list->form_format()->attach($form_format_ids);
+        return $form_list;
+    }
+
+    public function updateAttach(array $data, $id,array $form_format_ids)
+    {
+        $form_list = FormList::find($id);
+        $r_update = $form_list->update($data);
+        $r = $form_list->form_format()->sync($form_format_ids);
+        return $form_list;
+    }
+
+    public function deleteAttach($id)
+    {
+        $form_list = FormList::find($id);
+        $r = $form_list->form_format()->detach();
+        if ($r){
+            $form_list->delete();
+        }
+        return $r;
+    }
+
+    public function findAttach($id, $columns = ['*'])
+    {
+        $form_list = FormList::select($columns)->where('id',$id)->first();
+        $form_format = $form_list->form_format;
+        return $form_list;
+    }
+
+    public function formSystemFieldList($columns = ['*'])
+    {
+        return FormSystemField::get();
+    }
+
+    public function findAttachWhere($where, $columns = ['*'])
+    {
+        //$where['type'] = 'form';
+        $form_list = FormList::select($columns)->with('form_format')->where($where)->get();
+        return $form_list;
+    }
+
+    public function findLogIdByMenuId($menu_id)
+    {
+        $form_list = FormList::select(['id'])->where(array('menu_id'=>$menu_id))->get();
+        $list_ids = $form_list->isNotEmpty() ? array_column($form_list->toArray(),'id') : array();
+        $form_logs_list = FormFormatFormList::join('form_logs', 'form_format_form_list.form_format_id', '=', 'form_logs.form_format_id')
+            ->select('form_logs.id as form_log_id')
+            ->whereIn('form_format_form_list.form_list_id', $list_ids)
+            ->groupBy('form_logs.id')
+            ->get();
+        $form_logs_ids = $form_logs_list->isNotEmpty() ? array_column($form_logs_list->toArray(),'form_log_id') : array();
+        return $form_logs_ids;
+    }
+
+
+    public function findFieldNoByMenuId($menu_id)
+    {
+        $form_list = FormList::select([
+            'form_lists.*',
+            'form_format_form_list.form_list_id',
+            'form_format_form_list.form_format_id',
+            'form_format_form_list.field_no',
+            'form_format_form_list.field_label',
+            'form_format_form_list.form_name_cn',
+            'form_system_fields.system_field_name'
+        ])
+            ->leftJoin('form_format_form_list', 'form_format_form_list.form_list_id', '=', 'form_lists.id')
+            ->leftJoin('form_system_fields', 'form_system_fields.id', '=', 'form_lists.system_field_id')
+            ->where(array('form_lists.menu_id'=>$menu_id))->orderBy('form_lists.item_order', 'asc')->get();
+        $array = array();
+        foreach($form_list->toArray() as $k => $v){
+            $m = $v['item_order'];
+            if ($v['type'] == 'form'){
+                $array[$m]['field_no'][] = $v['field_no'];
+            }
+            else{
+                $array[$m]['system_field_name'][] = $v['system_field_name'];
+            }
+        }
+        return $array;
+    }
+
+    public function findSearchFormFieldByMenuId($menu_id)
+    {
+        $form_field_list = FormList::select([
+            'form_lists.*',
+            'form_format_form_list.form_list_id',
+            'form_format_form_list.form_format_id',
+            'form_format_form_list.field_no',
+            'form_format_form_list.field_label',
+            'form_format_form_list.form_name_cn'
+        ])
+            ->leftJoin('form_format_form_list', 'form_format_form_list.form_list_id', '=', 'form_lists.id')
+            ->where(array('form_lists.menu_id'=>$menu_id))
+            ->where(array('form_lists.searchable'=>1))
+            ->where(array('form_lists.system_field_id'=>2))
+            ->orderBy('form_lists.item_order', 'asc')
+            ->groupBy('form_format_form_list.field_no')
+            ->get();
+
+        $array_form = array_column($form_field_list->toArray(),'field_no');
+        return $array_form;
+    }
+
+    public function findSearchSystemFieldByMenuId($menu_id)
+    {
+        $system_field_list = FormList::select([
+            'form_lists.*',
+            'form_format_form_list.form_list_id',
+            'form_format_form_list.form_format_id',
+            'form_format_form_list.field_no',
+            'form_format_form_list.field_label',
+            'form_format_form_list.form_name_cn',
+            'form_system_fields.system_field_name'
+        ])
+            ->leftJoin('form_format_form_list', 'form_format_form_list.form_list_id', '=', 'form_lists.id')
+            ->leftJoin('form_system_fields', 'form_system_fields.id', '=', 'form_lists.system_field_id')
+            ->where(array('form_lists.menu_id'=>$menu_id))
+            ->where(array('form_lists.searchable'=>1))
+            ->where(array('form_lists.system_field_id'=>1))
+            ->orderBy('form_lists.item_order', 'asc')
+            ->groupBy('form_system_fields.system_field_name')
+            ->get();
+
+
+        $array_system = array_column($system_field_list->toArray(),'system_field_name');
+        return $array_system;
     }
 }
