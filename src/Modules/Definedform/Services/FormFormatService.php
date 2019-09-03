@@ -47,6 +47,8 @@ class FormFormatService implements FormFormatServiceInterface
             $data['is_new'] = $this->flag_is_new;
             $lastest_form_format = $this->getLastestByFormNo($form_no);
             $data['version'] = $lastest_form_format->version + 1;
+            $data['process_id'] = $lastest_form_format->process_id;
+            $data['company_id'] = $lastest_form_format->company_id;
             $update_param = array('is_new'=>$this->flag_is_not_new);
             //将原有该node_id的表单设计记录设置成非new
             if($form_no && $this->formFormatRepository->updateBy($update_param,'form_no', $form_no)){
