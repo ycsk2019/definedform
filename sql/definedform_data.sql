@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 03/09/2019 16:18:28
+ Date: 03/09/2019 17:12:41
 */
 
 SET NAMES utf8mb4;
@@ -21,14 +21,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Records of form_fields
 -- ----------------------------
-INSERT INTO `form_fields` VALUES (1, 'input', '{\"type\":\"input\",\"name\":\"单行输入框\",\"icon\":\"\",\"props\":{\"label\":\"单行输入框\",\"required\":false,\"dataType\":\"string\",\"placeholder\":\"请输入\"}}');
-INSERT INTO `form_fields` VALUES (2, 'textarea', '{\"type\":\"textarea\",\"name\":\"多行输入框\",\"icon\":\"\",\"props\":{\"label\":\"多行输入框\",\"required\":false,\"placeholder\":\"请输入\"}}');
-INSERT INTO `form_fields` VALUES (3, 'number', '{\"type\":\"number\",\"name\":\"数字输入框\",\"icon\":\"\",\"props\":{\"label\":\"数字输入框\",\"required\":false,\"placeholder\":\"请输入\",\"min\":\"\",\"max\":\"\",\"decimalLength\":\"\"}}');
-INSERT INTO `form_fields` VALUES (4, 'select', '{\"type\":\"select\",\"name\":\"下拉框\",\"icon\":\"\",\"props\":{\"label\":\"下拉框\",\"required\":false,\"placeholder\":\"请选择\",\"clearable\":false,\"options\":[{\"label\":\"选项1\",\"value\":1},{\"label\":\"选项2\",\"value\":2},{\"label\":\"选项3\",\"value\":3}]}}');
-INSERT INTO `form_fields` VALUES (5, 'date', '{\"type\":\"date\",\"name\":\"日期\",\"icon\":\"\",\"props\":{\"label\":\"日期\",\"required\":false,\"placeholder\":\"请选择\",\"format\":\"yyyy-MM-dd\",\"timestamp\":false}}');
-INSERT INTO `form_fields` VALUES (6, 'daterange', '{\"type\":\"daterange\",\"name\":\"日期区间\",\"icon\":\"\",\"props\":{\"label\":[\"开始时间\",\"结束时间\"],\"required\":false,\"startplaceholder\":\"请选择\",\"endplaceholder\":\"请选择\",\"format\":\"yyyy-MM-dd\",\"timestamp\":false}}');
-INSERT INTO `form_fields` VALUES (7, 'imgupload', '{\"type\":\"imgupload\",\"name\":\"图片\",\"icon\":\"\",\"props\":{\"label\":\"图片\",\"required\":false,\"length\":99999,\"multiple\":false}}');
-INSERT INTO `form_fields` VALUES (8, 'calculate', '{\"type\":\"calculate\",\"name\":\"计算公式\",\"icon\":\"\",\"props\":{\"label\":\"计算公式\",\"required\":false,\"placeholder\":\"自动计算数值\",\"formula\":[]}}');
+INSERT INTO `form_fields` VALUES (1, 'input', '{\"type\":\"input\",\"name\":\"单行输入框\",\"icon\":\"icon-danhangwenbenkuang\",\"props\":{\"label\":\"单行输入框\",\"required\":false,\"dataType\":1,\"placeholder\":\"请输入\",\"keyType\":1}}');
+INSERT INTO `form_fields` VALUES (2, 'textarea', '{\"type\":\"textarea\",\"name\":\"多行输入框\",\"icon\":\"icon-duohangwenbenkuang\",\"props\":{\"label\":\"多行输入框\",\"required\":false,\"placeholder\":\"请输入\"}');
+INSERT INTO `form_fields` VALUES (3, 'number', '{\"type\":\"number\",\"name\":\"数字输入框\",\"icon\":\"icon-shuzishurukuang\",\"props\":{\"label\":\"数字输入框\",\"required\":false,\"placeholder\":\"请输入\",\"min\":\"\",\"max\":\"\",\"decimalLength\":\"\",\"leftLimit\":false,\"rightLimit\":false}');
+INSERT INTO `form_fields` VALUES (4, 'select', '{\"type\":\"select\",\"name\":\"下拉框\",\"icon\":\"icon-xialakuang\",\"props\":{\"label\":\"下拉框\",\"required\":false,\"placeholder\":\"请选择\",\"options\":[{\"label\":\"选项1\",\"value\":1},{\"label\":\"选项2\",\"value\":2}],\"relatedItem\":[{\"value\":1,\"targets\":[]},{\"value\":2,\"targets\":[]}]}}');
+INSERT INTO `form_fields` VALUES (5, 'date', '{\"type\":\"date\",\"name\":\"日期\",\"icon\":\"icon-riqi\",\"props\":{\"label\":\"日期\",\"required\":false,\"placeholder\":\"请选择\",\"format\":\"yyyy-MM-dd\"}}');
+INSERT INTO `form_fields` VALUES (6, 'daterange', '{\"type\":\"daterange\",\"name\":\"日期区间\",\"icon\":\"icon-riqiqujian\",\"props\":{\"label\":[\"开始时间\",\"结束时间\"],\"required\":false,\"placeholder\":[\"请选择\",\"请选择\"],\"format\":\"yyyy-MM-dd\"}}');
+INSERT INTO `form_fields` VALUES (7, 'imgupload', '{\"type\":\"imgupload\",\"name\":\"图片\",\"icon\":\"icon-tupian\",\"props\":{\"label\":\"图片\",\"placeholder\":\"请上传\",\"required\":false}}');
+INSERT INTO `form_fields` VALUES (8, 'calculate', '{\"type\":\"calculate\",\"name\":\"计算公式\",\"icon\":\"icon-jisuangongshi\",\"props\":{\"label\":\"计算公式\",\"required\":false,\"placeholder\":\"自动计算数值\",\"formula\":[]}}');
+INSERT INTO `form_fields` VALUES (9, 'module', '{\"type\":\"module\",\"name\":\"模块\",\"icon\":\"icon-mokuai\",\"props\":{\"title\":\"模块名\"},\"lists\":[]}');
 
 
 -- ----------------------------
