@@ -2,6 +2,8 @@
 
 
 namespace Lskstc\Definedform\Modules\Definedform\Services;
+
+use Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface;
 use Lskstc\Definedform\Modules\Definedform\Repositories\FormListRepositoryInterface;
 use Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepositoryInterface;
 
@@ -9,10 +11,11 @@ class OrderService implements OrderServiceInterface
 {
     protected $orderRepository;
 
-    public function __construct(OrderRepositoryInterface $orderRepository,FormListRepositoryInterface $formListRepository)
+    public function __construct(OrderRepositoryInterface $orderRepository,FormListRepositoryInterface $formListRepository,FormFormatRepositoryInterface $formFormatRepository)
     {
         $this->orderRepository = $orderRepository;
-	$this->formListRepository = $formListRepository;
+	    $this->formListRepository = $formListRepository;
+	    $this->formFormatRepository = $formFormatRepository;
     }
 
     public function all(){
@@ -21,7 +24,10 @@ class OrderService implements OrderServiceInterface
 
     public function find($id, $columns = ['*'])
     {
-        return $this->orderRepository->find($id, $columns);
+        $detail = $this->orderRepository->find($id, $columns);
+        $formFormat = $this->formFormatRepository->find($detail->form_logs->form_format_id);
+        $detail->form_logs->form_format = $formFormat;
+        return $detail;
     }
 
     public function create($data){
