@@ -22,7 +22,7 @@ class FormMenuController extends Controller
      * @return list
      */
     public function index(){
-        $result = $this->formMenuService->all();
+        $result = $this->formMenuService->lists();
         ApiResponse::output($result);
     }
 

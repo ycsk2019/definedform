@@ -86,4 +86,8 @@ class FormMenuService implements FormMenuServiceInterface
 
         return $form_menu;
     }
+
+    public function lists(){
+        return $this->formMenuRepository->lists();
+    }
 }

@@ -3,7 +3,10 @@
 
 namespace Lskstc\Definedform\Modules\Definedform\Repositories;
 
+
+use Lskstc\Definedform\Modules\Definedform\Models\FormFormatFormList;
 use Lskstc\Definedform\Modules\Definedform\Models\FormMenu;
+use Lskstc\Definedform\Modules\Definedform\Models\FormSystemField;
 
 class FormMenuRepository implements FormMenuRepositoryInterface
 {
@@ -109,5 +112,23 @@ class FormMenuRepository implements FormMenuRepositoryInterface
         $form_menu = FormMenu::select($columns)->where('id',$id)->first();
         $process = $form_menu->process;
         return $form_menu;
+    }
+
+    public function lists()
+    {
+        $form_menu = FormMenu::leftJoin('form_lists', 'form_lists.menu_id', '=', 'form_menus.id')->select('form_menus.*','form_lists.type as lists_type','form_lists.system_field_id')->orderBy('form_menus.type')->groupBy('form_menus.id')->get();
+        $form_menu_array = $form_menu->toArray();
+        foreach($form_menu_array as $k => $v){
+            if($v['lists_type'] == 'form'){
+                $field_labels = FormFormatFormList::select('field_label')->where(array('form_list_id'=>$v['id']))->get()->toArray();
+                $form_menu_array[$k]['field_label'] = array_column($field_labels,'field_label');
+            }
+            else{
+                $field_labels = FormSystemField::select('system_field_name_cn')->where(array('id'=>$v['system_field_id']))->get()->toArray();
+                $form_menu_array[$k]['field_label'] = array_column($field_labels,'system_field_name_cn');
+            }
+
+        }
+        return $form_menu_array;
     }
 }
