@@ -19,6 +19,6 @@ class FormMenu extends Model
      * 获得此菜单关联的工作流
      */
     public function process(){
-        return $this->belongsToMany('Lskstc\Definedform\Models\Process');
+        return $this->belongsToMany('Yiche\Workflow\Models\Process');
     }
 }
