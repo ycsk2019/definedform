@@ -99,10 +99,8 @@ class FormMenuRepository implements FormMenuRepositoryInterface
     public function deleteAttach($id)
     {
         $form_menu = FormMenu::find($id);
-        $r = $form_menu->process()->detach();
-        if ($r){
-            $form_menu->delete();
-        }
+        $form_menu->process()->detach();
+        $r =$form_menu->delete();
         return $r;
     }
 
