@@ -105,4 +105,14 @@ class FormMenuController extends Controller
         $result = $this->formMenuService->findByParentId($request->input("parent_id"));
         ApiResponse::output($result);
     }
+
+    /**
+     * 显示菜单列表
+     *
+     * @return list
+     */
+    public function showlist(){
+        $result = $this->formMenuService->showlist();
+        ApiResponse::output($result);
+    }
 }

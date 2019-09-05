@@ -96,5 +96,7 @@ Route::prefix('definedform')->group(function () {
         Route::post('delete', \App\Modules\Definedform\Controllers\FormMenuController::class . '@delete');
         //    根据父菜单ID查找列表
         Route::post('findByParentId', \App\Modules\Definedform\Controllers\FormMenuController::class . '@findByParentId');
+        //    显示列表
+        Route::get('showlist', \App\Modules\Definedform\Controllers\FormMenuController::class . '@showlist');
     });
 });

@@ -90,4 +90,42 @@ class FormMenuService implements FormMenuServiceInterface
     public function lists(){
         return $this->formMenuRepository->lists();
     }
+
+    public function showlist(){
+        $all_list = $this->formMenuRepository->all();
+        $result = $this->makelist($all_list->toArray());
+        return $result;
+    }
+
+    private function makelist($all_list){
+        $result = array();
+        foreach ($all_list as $k =>$v){
+            if($v['level'] == 1){
+                $key = $v['id'];
+                $result[$key]['id'] = $v['id'];
+                $result[$key]['pid'] = $v['parent_id'];
+                $result[$key]['title'] = $v['name'];
+                $result[$key]['icon'] = '';
+                $result[$key]['name'] = ($v['name'] == '工作台') ? 'workbench' : 'showorder';
+                $result[$key]['is_menu'] = 1;
+                $result[$key]['index'] = 0;
+                $result[$key]['type'] = $v['type'];
+            }
+            else{
+                $key = $v['parent_id'];
+                $result[$key]['children'][] = array(
+                    'id' =>$v['id'],
+                    'pid' =>$v['parent_id'],
+                    'title' =>$v['name'],
+                    'icon' =>'',
+                    'name' =>($result[$key]['title'] == '工作台') ? 'workbench_item' : 'showorder_item',
+                    'is_menu' =>1,
+                    'index' =>0,
+                    'type' =>$v['type'],
+                    'children' => array()
+                );
+            }
+        }
+        return $result;
+    }
 }
