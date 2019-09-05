@@ -19,6 +19,6 @@ class FormList extends Model
      * 获得此列表项关联的表单模板
      */
     public function form_format(){
-        return $this->belongsToMany('App\Models\FormFormat')->withPivot('field_no', 'field_label', 'form_name_cn');
+        return $this->belongsToMany('App\Modules\Definedform\Models\FormFormat')->withPivot('field_no', 'field_label', 'form_name_cn');
     }
 }
