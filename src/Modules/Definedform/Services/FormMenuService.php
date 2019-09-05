@@ -106,7 +106,7 @@ class FormMenuService implements FormMenuServiceInterface
                 $result[$key]['pid'] = $v['parent_id'];
                 $result[$key]['title'] = $v['name'];
                 $result[$key]['icon'] = '';
-                $result[$key]['name'] = ($v['name'] == '1¡è¡Á¡Â¨¬¡§') ? 'workbench' : 'showorder';
+                $result[$key]['name'] = ($v['name'] == 'å·¥ä½œå°') ? 'workbench' : 'showorder';
                 $result[$key]['is_menu'] = 1;
                 $result[$key]['index'] = 0;
                 $result[$key]['type'] = $v['type'];
@@ -118,7 +118,7 @@ class FormMenuService implements FormMenuServiceInterface
                     'pid' =>$v['parent_id'],
                     'title' =>$v['name'],
                     'icon' =>'',
-                    'name' =>($result[$key]['title'] == '1¡è¡Á¡Â¨¬¡§') ? 'workbench_item' : 'showorder_item',
+                    'name' =>($result[$key]['title'] == 'å·¥ä½œå°') ? 'workbench_item' : 'showorder_item',
                     'is_menu' =>1,
                     'index' =>0,
                     'type' =>$v['type'],
@@ -126,6 +126,6 @@ class FormMenuService implements FormMenuServiceInterface
                 );
             }
         }
-        return $result;
+        return array_values($result);
     }
 }
