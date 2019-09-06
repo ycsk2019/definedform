@@ -94,7 +94,7 @@ class FormListRepository implements FormListRepositoryInterface
 
     public function updateAttach(array $data, $id,array $form_format_ids)
     {
-        $form_list = FormList::find($id);
+        $form_list = FormList::findOrFail($id);
         $r_update = $form_list->update($data);
         $r = $form_list->form_format()->sync($form_format_ids);
         return $form_list;
@@ -102,7 +102,7 @@ class FormListRepository implements FormListRepositoryInterface
 
     public function deleteAttach($id)
     {
-        $form_list = FormList::find($id);
+        $form_list = FormList::findOrFail($id);
         $r = $form_list->form_format()->detach();
         if ($r){
             $form_list->delete();
