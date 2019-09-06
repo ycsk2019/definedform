@@ -93,7 +93,7 @@ class FormListController extends Controller
         ]);
         $list = $this->formListService->findAttachByMenuId($request->input('menu_id'));
         //$list = $this->formListService->findLogIdByMenuId($request->input('menu_id'));
-        return $list;
+        ApiResponse::output($list);
     }
 
     /**

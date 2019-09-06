@@ -9,7 +9,7 @@ class FormList extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['menu_id','form_name_cn','field_label','field_no','form_format_id','item_order','system_field_id','type','searchable'];
+    protected $fillable = ['menu_id','title','form_name_cn','field_label','field_no','form_format_id','item_order','system_field_id','type','searchable'];
 
     protected $guarded = ['id'];
 
