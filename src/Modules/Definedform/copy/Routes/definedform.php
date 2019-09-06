@@ -68,6 +68,8 @@ Route::prefix('definedform')->group(function () {
     	Route::get('formSystemFieldList', \App\Modules\Definedform\Controllers\FormListController::class . '@formSystemFieldList');
     	//    查找搜索字段
     	Route::get('findSearchFieldByMenuId', \App\Modules\Definedform\Controllers\FormListController::class . '@findSearchFieldByMenuId');
+        //    重新排序
+        Route::post('resort', \App\Modules\Definedform\Controllers\FormListController::class . '@resort');
     });
 
     // 表单列表头设计
