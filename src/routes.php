@@ -37,6 +37,8 @@ Route::prefix('definedformsrc')->group(function () {
         Route::get('getLastestList', \Lskstc\Definedform\Modules\Definedform\Controllers\FormFormatController::class . '@getLastestList');
         //    根据表单编号和菜单ID查询表单模板详情
         Route::post('findByFormNoVersion', \Lskstc\Definedform\Modules\Definedform\Controllers\FormFormatController::class . '@findByFormNoVersion');
+        //    根据公司ID和菜单ID查询表单模板列表
+        Route::post('findByCompanyIdMenuId', \Lskstc\Definedform\Modules\Definedform\Controllers\FormFormatController::class . '@findByCompanyIdMenuId');
     });
 
     // 表单控件
@@ -66,6 +68,8 @@ Route::prefix('definedformsrc')->group(function () {
     	Route::get('formSystemFieldList', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@formSystemFieldList');
     	//    查找搜索字段
     	Route::get('findSearchFieldByMenuId', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@findSearchFieldByMenuId');
+        //    重新排序
+        Route::post('resort', \Lskstc\Definedform\Modules\Definedform\Controllers\FormListController::class . '@resort');
     });
 
     // 表单列表头设计
@@ -94,5 +98,7 @@ Route::prefix('definedformsrc')->group(function () {
         Route::post('delete', \Lskstc\Definedform\Modules\Definedform\Controllers\FormMenuController::class . '@delete');
         //    根据父菜单ID查找列表
         Route::post('findByParentId', \Lskstc\Definedform\Modules\Definedform\Controllers\FormMenuController::class . '@findByParentId');
+        //    显示列表
+        Route::get('showlist', \Lskstc\Definedform\Modules\Definedform\Controllers\FormMenuController::class . '@showlist');
     });
 });

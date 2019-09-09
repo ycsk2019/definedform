@@ -6,6 +6,7 @@ namespace Lskstc\Definedform\Modules\Definedform\Repositories;
 
 use Lskstc\Definedform\Modules\Definedform\Models\FormFormatFormList;
 use Lskstc\Definedform\Modules\Definedform\Models\FormMenu;
+use Lskstc\Definedform\Modules\Definedform\Models\FormMenuProcess;
 use Lskstc\Definedform\Modules\Definedform\Models\FormSystemField;
 
 class FormMenuRepository implements FormMenuRepositoryInterface
@@ -128,5 +129,11 @@ class FormMenuRepository implements FormMenuRepositoryInterface
 
         }
         return $form_menu_array;
+    }
+
+    public function findProcessIdsByMenuId($menu_id)
+    {
+        $process_ids = FormMenuProcess::select('process_id')->where('form_menu_id',$menu_id)->get()->toArray();
+        return array_column($process_ids, 'process_id');
     }
 }

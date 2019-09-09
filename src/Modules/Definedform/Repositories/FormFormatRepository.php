@@ -108,4 +108,9 @@ class FormFormatRepository implements FormFormatRepositoryInterface
     {
         return FormFormat::select($columns)->where($where)->first();
     }
+
+    public function findProcessIdsByMenuId(array $process_ids,$company_id, $columns = ['*'])
+    {
+        return FormFormat::select($columns)->whereIn('process_id', $process_ids)->where('company_id',$company_id)->get();
+    }
 }

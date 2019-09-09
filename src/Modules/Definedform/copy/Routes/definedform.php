@@ -38,6 +38,8 @@ Route::prefix('definedform')->group(function () {
         Route::get('getLastestList', \App\Modules\Definedform\Controllers\FormFormatController::class . '@getLastestList');
         //    根据表单编号和菜单ID查询表单模板详情
         Route::post('findByFormNoVersion', \App\Modules\Definedform\Controllers\FormFormatController::class . '@findByFormNoVersion');
+        //    根据公司ID和菜单ID查询表单模板列表
+        Route::post('findByCompanyIdMenuId', \App\Modules\Definedform\Controllers\FormFormatController::class . '@findByCompanyIdMenuId');
     });
 
     // 表单控件

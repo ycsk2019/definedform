@@ -27,7 +27,9 @@ class FormFormatController extends Controller
             'company_id' => "int|required"
         ]);
         $input = $request->input();
-        $result = $this->formFormatService->findWhere($input);
+        //不传field_info，字段数据量太大会卡顿
+        $columns = ['id','form_name_cn','form_no','process_id','company_id','is_new','version','desc','deleted_at','created_at','updated_at'];
+        $result = $this->formFormatService->findWhere($input,$columns);
         ApiResponse::output($result);
     }
 
@@ -119,6 +121,23 @@ class FormFormatController extends Controller
         ]);
         $input = $request->input();
         $result = $this->formFormatService->findByFormNoVersion($input);
+        ApiResponse::output($result);
+    }
+
+    /**
+     * 根据公司ID和菜单ID查询表单模板列表
+     *
+     * @return list
+     */
+    public function findByCompanyIdMenuId(Request $request)
+    {
+        $this->validate($request, [
+            'company_id' => 'required|int',
+            'menu_id' => 'required|int',
+        ]);
+        $input = $request->input();
+        $columns = ['id','form_name_cn','form_no','field_info','is_new','version','desc','process_id','company_id','updated_at','created_at'];
+        $result = $this->formFormatService->findByCompanyIdMenuId($input['company_id'],$input['menu_id'],$columns);
         ApiResponse::output($result);
     }
 

@@ -5,6 +5,7 @@ namespace App\Modules\Definedform\Services;
 
 
 use App\Modules\Definedform\Repositories\FormFormatRepositoryInterface;
+use App\Modules\Definedform\Repositories\FormMenuRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use App\Modules\Definedform\Helpers\Util;
 
@@ -14,9 +15,10 @@ class FormFormatService implements FormFormatServiceInterface
     protected $flag_is_new = 1;
     protected $flag_is_not_new = 2;
 
-    public function __construct(FormFormatRepositoryInterface $formFormatRepository)
+    public function __construct(FormFormatRepositoryInterface $formFormatRepository,FormMenuRepositoryInterface $formMenuRepository)
     {
         $this->formFormatRepository = $formFormatRepository;
+        $this->formMenuRepository = $formMenuRepository;
     }
 
     public function all($data){
@@ -149,5 +151,11 @@ class FormFormatService implements FormFormatServiceInterface
             "version" => $input['version']
         );
         return $this->formFormatRepository->findFirstWhere($where);
+    }
+
+    public function findByCompanyIdMenuId($company_id,$menu_id, $columns = ['*'])
+    {
+        $process_ids = $this->formMenuRepository->findProcessIdsByMenuId($menu_id);
+        return $this->formFormatRepository->findProcessIdsByMenuId($process_ids,$company_id,$columns);
     }
 }
