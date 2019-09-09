@@ -109,9 +109,7 @@ class FormListRepository implements FormListRepositoryInterface
     {
         $form_list = FormList::findOrFail($id);
         $r = $form_list->form_format()->detach();
-        if ($r){
-            $form_list->delete();
-        }
+        $form_list->delete();
         return $r;
     }
 

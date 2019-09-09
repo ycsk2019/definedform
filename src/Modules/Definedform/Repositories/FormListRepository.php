@@ -72,12 +72,17 @@ class FormListRepository implements FormListRepositoryInterface
 
     public function findFirstBy($field, $value, $columns = ['*'])
     {
-        // TODO: Implement findFirstBy() method.
+        return FormList::select($columns)->where($field,$value)->first();
     }
 
     public function findFirstWhere($where, $columns = ['*'])
     {
-        // TODO: Implement findFirstWhere() method.
+        return FormList::select($columns)->where($where)->first();
+    }
+
+    public function findFirstByMenuId($menu_id, $columns = ['*'])
+    {
+        return FormList::select($columns)->where('menu_id',$menu_id)->orderBy('item_order','desc')->first();
     }
 
     public function insert(array $data)
@@ -104,9 +109,7 @@ class FormListRepository implements FormListRepositoryInterface
     {
         $form_list = FormList::findOrFail($id);
         $r = $form_list->form_format()->detach();
-        if ($r){
-            $form_list->delete();
-        }
+        $form_list->delete();
         return $r;
     }
 

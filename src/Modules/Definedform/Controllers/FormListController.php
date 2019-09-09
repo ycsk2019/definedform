@@ -49,14 +49,13 @@ class FormListController extends Controller
         $this->validate($request, [
             'menu_id' => "int|required",
             'type' => "string|required",
-            'item_order' => "int|required",
             'system_field_id' => "int",
             'searchable' => "int|required|between:1,2",
-            'form_format_ids' => "array|required"
+            'form_format_ids' => "array"
         ]);
         $input = $request->input();
         $form_format_ids = $input['form_format_ids'];
-        $result = $this->formListService->createAttach($input,$form_format_ids);
+        $result = $input['type'] == 'form' ? $this->formListService->createAttach($input,$form_format_ids) : $this->formListService->create($input);
         ApiResponse::output($result);
     }
 
@@ -70,14 +69,12 @@ class FormListController extends Controller
             'id' => "int|required",
             'menu_id' => "int|required",
             'type' => "string|required",
-            'item_order' => "int|required",
             'system_field_id' => "int",
             'searchable' => "int|required|between:1,2",
-            'form_format_ids' => "array|required"
+            'form_format_ids' => "array"
         ]);
         $input = $request->input();
-        $form_format_ids = $input['form_format_ids'];
-        $result = $this->formListService->updateAttach($input,$input['id'],$form_format_ids);
+        $result = $input['type'] == 'form' ? $this->formListService->updateAttach($input,$input['id'],$input['form_format_ids']) : $this->formListService->update($input,$input['id']) ;
         ApiResponse::output($result);
     }
 
@@ -112,6 +109,17 @@ class FormListController extends Controller
      *
      */
     public function updateMulti(Request $request)
+    {
+        $input = $request->input();
+        $result = $this->formListService->updateMulti($input);
+        ApiResponse::output($result);
+    }
+
+    /**
+     * 批量重排序表单列表设计
+     *
+     */
+    public function resort(Request $request)
     {
         $input = $request->input();
         $result = $this->formListService->updateMulti($input);

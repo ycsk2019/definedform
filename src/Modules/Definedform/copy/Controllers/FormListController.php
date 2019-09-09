@@ -69,7 +69,6 @@ class FormListController extends Controller
             'id' => "int|required",
             'menu_id' => "int|required",
             'type' => "string|required",
-            'item_order' => "int|required",
             'system_field_id' => "int",
             'searchable' => "int|required|between:1,2",
             'form_format_ids' => "array"
