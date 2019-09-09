@@ -5,6 +5,7 @@ namespace Lskstc\Definedform\Modules\Definedform\Repositories;
 
 
 use Lskstc\Definedform\Modules\Definedform\Models\FormFormatFormList;
+use Lskstc\Definedform\Modules\Definedform\Models\FormList;
 use Lskstc\Definedform\Modules\Definedform\Models\FormMenu;
 use Lskstc\Definedform\Modules\Definedform\Models\FormMenuProcess;
 use Lskstc\Definedform\Modules\Definedform\Models\FormSystemField;
@@ -115,18 +116,26 @@ class FormMenuRepository implements FormMenuRepositoryInterface
 
     public function lists()
     {
-        $form_menu = FormMenu::leftJoin('form_lists', 'form_lists.menu_id', '=', 'form_menus.id')->select('form_menus.*','form_lists.type as lists_type','form_lists.system_field_id')->orderBy('form_menus.type')->groupBy('form_menus.id')->get();
+        $form_menu = FormMenu::get();
         $form_menu_array = $form_menu->toArray();
         foreach($form_menu_array as $k => $v){
-            if($v['lists_type'] == 'form'){
-                $field_labels = FormFormatFormList::select('field_label')->where(array('form_list_id'=>$v['id']))->get()->toArray();
-                $form_menu_array[$k]['field_label'] = array_column($field_labels,'field_label');
-            }
-            else{
-                $field_labels = FormSystemField::select('system_field_name_cn')->where(array('id'=>$v['system_field_id']))->get()->toArray();
-                $form_menu_array[$k]['field_label'] = array_column($field_labels,'system_field_name_cn');
-            }
+            $field_list_array = FormList::where(array('menu_id'=>$v['id']))->get()->toArray();
+            foreach($field_list_array as $m => $n){
+                if ($n['type'] == 'form'){
+                    $data_label = FormFormatFormList::select('field_label')->where(array('form_list_id'=>$n['id']))->first();
+                    if ($data_label){
+                        $field_label = $data_label->field_label;
+                    }
+                }
+                else{
+                    $data_label = FormSystemField::select('system_field_name_cn')->where(array('id'=>$n['system_field_id']))->first();
+                    if ($data_label){
+                        $field_label = $data_label->system_field_name_cn;
+                    }
 
+                }
+                $form_menu_array[$k]['field_labels'][] = $field_label;
+            }
         }
         return $form_menu_array;
     }
