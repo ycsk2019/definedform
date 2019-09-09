@@ -121,7 +121,10 @@ class FormListController extends Controller
      */
     public function resort(Request $request)
     {
-        $input = $request->input();
+        $this->validate($request, [
+            'order_array' => "array|required"
+        ]);
+        $input = $request->input('order_array');
         $result = $this->formListService->updateMulti($input);
         ApiResponse::output($result);
     }
