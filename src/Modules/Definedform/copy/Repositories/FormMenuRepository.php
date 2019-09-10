@@ -118,23 +118,8 @@ class FormMenuRepository implements FormMenuRepositoryInterface
         $form_menu = FormMenu::get();
         $form_menu_array = $form_menu->toArray();
         foreach($form_menu_array as $k => $v){
-            $field_list_array = FormList::where(array('menu_id'=>$v['id']))->get()->toArray();
-            foreach($field_list_array as $m => $n){
-                if ($n['type'] == 'form'){
-                    $data_label = FormFormatFormList::select('field_label')->where(array('form_list_id'=>$n['id']))->first();
-                    if ($data_label){
-                        $field_label = $data_label->field_label;
-                    }
-                }
-                else{
-                    $data_label = FormSystemField::select('system_field_name_cn')->where(array('id'=>$n['system_field_id']))->first();
-                    if ($data_label){
-                        $field_label = $data_label->system_field_name_cn;
-                    }
-
-                }
-                $form_menu_array[$k]['field_labels'][] = $field_label;
-            }
+            $field_list_array = FormList::select('title')->where(array('menu_id'=>$v['id']))->get()->toArray();
+            $form_menu_array[$k]['titles'] = array_column($field_list_array,'title');
         }
         return $form_menu_array;
     }
