@@ -21,9 +21,11 @@
   }
 ## 使用
 - 使用预置路由与控制器方法
-http://xxx/definedformsrc/**，具体路由请查看\根目录\routes\defineform.php
+http://xxx/definedformsrc/**   
+具体路由请查看\根目录\routes\defineform.php
 
 - 使用自定义路由与控制器方法
-http://xxx/definedform/**，具体路由请查看\根目录\vendor\lskstc\definedform\src\routes.php
+http://xxx/definedform/**  
+具体路由请查看\根目录\vendor\lskstc\definedform\src\routes.php
 
 - 除了路由，自定义控制器，服务类，模型类等均在\根目录\Modules\，可自行修改使用
