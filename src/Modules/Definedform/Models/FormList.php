@@ -19,6 +19,6 @@ class FormList extends Model
      * 获得此列表项关联的表单模板
      */
     public function form_format(){
-        return $this->belongsToMany('Lskstc\Definedform\Modules\Definedform\Models\FormFormat')->withPivot('field_no', 'field_label', 'form_name_cn');
+        return $this->belongsToMany('Lskstc\Definedform\Modules\Definedform\Models\FormFormat')->select('form_formats.id')->withPivot('field_no', 'field_label', 'form_name_cn');
     }
 }
