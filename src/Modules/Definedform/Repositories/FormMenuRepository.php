@@ -119,7 +119,7 @@ class FormMenuRepository implements FormMenuRepositoryInterface
         $form_menu = FormMenu::get();
         $form_menu_array = $form_menu->toArray();
         foreach($form_menu_array as $k => $v){
-            $field_list_array = FormList::select('title')->where(array('menu_id'=>$v['id']))->get()->toArray();
+            $field_list_array = FormList::select('title')->where(array('menu_id'=>$v['id']))->orderBy('item_order')->get()->toArray();
             $form_menu_array[$k]['titles'] = array_column($field_list_array,'title');
         }
         return $form_menu_array;
