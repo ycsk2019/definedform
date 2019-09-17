@@ -49,46 +49,65 @@ class OrderService implements OrderServiceInterface
     }
 
     public function lists($where, $search_data,$page = 1, $size = 20){
-        $log_ids = $this->formListRepository->findLogIdByMenuId($where['menu_id']);
-        $array_form = $this->formListRepository->findSearchFormFieldByMenuId($where['menu_id']);
-        $array_system = $this->formListRepository->findSearchSystemFieldByMenuId($where['menu_id']);
-        $search_ids = array_merge($array_form,$array_system);
         /*$search_data = array(
-            'input_201908021440003123549'=>'是',
-            'input_201908021440003123546'=>'郑水根'
+            '2'=>'是',
+            '3'=>'郑水根'
         );*/
-        foreach($search_data as $k => $v){
-            if(!in_array($k,$search_ids)){
-                $result = array(
-                    'error_no' => 1000001,
-                    'msg' => '字段: '.$k.' 为不可搜索字段'
-                );
-                return $result;
+        if(count($search_data) > 0){
+            $search_ids = array_keys($search_data);
+            $format_ids = $this->formListRepository->findFormatIdsByListIds($search_ids);
+            $search_fields = $this->formListRepository->findSearchFormField($format_ids,$search_data);
+
+            $list = $this->formListRepository->findBy('menu_id', $where['menu_id'], ['*'],'item_order')->toArray();
+            foreach($list as $k => $v){
+                if(in_array($v['id'],$search_ids)){
+                    if ($v['searchable'] != 1){
+                        $result = array(
+                            'error_no' => 1000001,
+                            'msg' => '字段: '.$k.' 为不可搜索字段'
+                        );
+                        return $result;
+                    }
+                }
             }
         }
-
-        $order_list = $this->orderRepository->findByLogIdsSearch($log_ids,$search_data,$page, $size);
-        $fields_array = $this->formListRepository->findFieldNoByMenuId($where['menu_id']);
-
-        $data = $order_list->getCollection();//从paginate抽取
-        $order_array = json_decode($data->toJson(),true);
-
-        foreach ($order_array as $k => $v){
-            $order_array[$k]['fields_array'] = $fields_array;
+        else{
+            $search_fields = [];
         }
 
-        $order_collect = collect($order_array);
+        $log_ids = $this->formListRepository->findLogIdByMenuId($where['menu_id']);
+        //$order_list = $this->orderRepository->findByLogIdsSearch($log_ids,$search_data,$page, $size);
+        $order_list = $this->orderRepository->findByLogIdsInfo($log_ids,$search_fields,$page, $size);
 
-        $multiplied = $order_collect->map(function ($item, $key) {
-            return $this->itemCollect($item, $key);
-        });
+        if(empty($order_list)){
+            $result['list'] = [];
+            $result['total'] = 0;
+        }
+        else{
+            $fields_array = $this->formListRepository->findFieldNoByMenuId($where['menu_id']);
 
-        $multiplied->all();
+            //$data = $order_list->getCollection();//从paginate抽取
+            $data = $order_list;//从paginate抽取
+            $order_array = json_decode($data->toJson(),true);
+
+            foreach ($order_array as $k => $v){
+                $order_array[$k]['fields_array'] = $fields_array;
+            }
+
+            $order_collect = collect($order_array);
+
+            $multiplied = $order_collect->map(function ($item, $key) {
+                return $this->itemCollect($item, $key);
+            });
+
+            $multiplied->all();
 
 
-
-        $order_list->setCollection($multiplied);//设置到paginate中
-        return $order_list;
+            //$order_list->setCollection($multiplied);//设置到paginate中
+            $result['list'] = $multiplied;//设置到paginate中
+            $result['total'] = $multiplied->count();//设置到paginate中
+        }
+        return $result;
     }
 
     private function itemCollect($item,$key){

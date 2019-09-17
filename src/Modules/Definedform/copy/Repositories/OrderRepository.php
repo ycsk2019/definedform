@@ -37,10 +37,10 @@ class OrderRepository implements OrderRepositoryInterface
                 if ($input['form_log']){
                     $input['form_log']['order_id'] = $order->id;
                     $input['form_log']['form_format_id'] = $input['form_format_id'];
-                    $form_log_result = $this->formLogService->create($input['form_log']);
+                    $form_log_result = FormLog::create($input['form_log']);
                     if($form_log_result){
                         //更新
-                        $orderUpdate = new Order();
+                        $orderUpdate = Order::FindOrFail($order->id);
                         $orderUpdate->form_log_id = $form_log_result->id;
                         $updateResult = $orderUpdate->save();
                         if ($updateResult){
@@ -257,5 +257,82 @@ class OrderRepository implements OrderRepositoryInterface
                 ->paginate($size,['*'], 'page', $page);
         }
 
+    }
+
+    public function findByLogIdsInfo($log_ids, $search_fields, $page = 1, $size = 20,$columns = ['*'])
+    {
+        if (count($search_fields) > 0){
+            $i = 0;
+            foreach($search_fields as $k => $and){
+                $j = 0;
+                foreach ($and as $m => $n){
+                    if($j == 0){
+                        $orRaw = " JSON_CONTAINS( form_logs.form_info, '\\\"{$n['search_value']}\\\"', '$.{$n['field_no']}' ) ";
+                        $orRaw = $orRaw . " AND form_logs.form_format_id = {$n['form_format_id']} ";
+                    }
+                    else{
+                        $orRaw = $orRaw . " AND JSON_CONTAINS( form_logs.form_info, '\\\"{$n['search_value']}\\\"', '$.{$n['field_no']}' ) ";
+                    }
+                    $j ++;
+                }
+                $orRaw = " ( " . $orRaw ." ) ";
+                if($i == 0){
+                    $whereRaw = $orRaw;
+                }
+                else{
+                    $whereRaw = $whereRaw . " OR " . $orRaw;
+                }
+                $i ++;
+            }
+            return DB::table('form_orders')
+                ->join('form_logs', 'form_orders.id', '=', 'form_logs.order_id')
+                ->select('form_orders.*', 'form_logs.form_info')
+                ->whereIn('form_log_id', $log_ids)
+                ->whereRaw($whereRaw)
+                ->offset(($page-1) * $size)
+                ->limit($size)
+                ->get();
+        }
+        else{
+            return DB::table('form_orders')
+                ->join('form_logs', 'form_orders.id', '=', 'form_logs.order_id')
+                ->select('form_orders.*', 'form_logs.form_info')
+                ->whereIn('form_log_id', $log_ids)
+                ->offset(($page-1) * $size)
+                ->limit($size)
+                ->get();
+        }
+
+        /*
+         array:2 [
+          0 => array:2 [
+            0 => array:4 [
+              "form_list_id" => 2
+              "form_format_id" => 2
+              "field_no" => "input_201908021440003123549"
+              "search_value" => "是"
+            ]
+            1 => array:4 [
+              "form_list_id" => 3
+              "form_format_id" => 2
+              "field_no" => "input_201908021440003123546"
+              "search_value" => "郑水根"
+            ]
+          ]
+          1 => array:2 [
+            0 => array:4 [
+              "form_list_id" => 2
+              "form_format_id" => 3
+              "field_no" => "input_201908021440003123548"
+              "search_value" => "是"
+            ]
+            1 => array:4 [
+              "form_list_id" => 3
+              "form_format_id" => 3
+              "field_no" => "input_201908021440003123545"
+              "search_value" => "郑水根"
+            ]
+          ]
+        ]*/
     }
 }

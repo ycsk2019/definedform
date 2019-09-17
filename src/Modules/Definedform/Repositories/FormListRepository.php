@@ -219,4 +219,57 @@ class FormListRepository implements FormListRepositoryInterface
         $array_system = array_column($system_field_list->toArray(),'system_field_name');
         return $array_system;
     }
+
+    public function findFormatIdsByListIds($search_ids)
+    {
+        $form_format_id_array = FormFormatFormList::select('form_format_id')
+            ->whereIn('form_list_id', $search_ids)
+            ->groupBy('form_format_id')
+            ->get()->toArray();
+
+
+        $result = array_column($form_format_id_array,'form_format_id');
+        return $result;
+    }
+
+    public function findSearchFormField($format_ids,$search_data)
+    {
+        ksort($search_data);
+        $search_ids = array_keys($search_data);
+        $search_data_value = array_values($search_data);
+
+        $result_array = array();
+        //dump($format_ids);
+        foreach($format_ids as $k => $v){
+            $field_nos = FormFormatFormList::select('form_list_id','form_format_id','field_no')
+                ->where('form_format_id', $v)
+                ->whereIn('form_list_id',$search_ids)
+                ->get();
+            $field_no_array = $field_nos->toArray();
+            if ($field_nos->count() == count($search_data)){
+                foreach ($field_no_array as $m => $n){
+                    $field_no_array[$m]['search_value'] = $search_data_value[$m] ? $search_data_value[$m] : '';
+                }
+                $result_array[] = $field_no_array;
+            }
+            else{
+                unset($format_ids[$k]);
+            }
+
+            //dump($field_no_array);
+
+        }
+
+        //dump($result_array);
+        return $result_array;
+    }
+
+    private function format_map($data)
+    {
+        $array = array(
+            $data['form_format_id']
+        );
+
+        return($num*$num);
+    }
 }

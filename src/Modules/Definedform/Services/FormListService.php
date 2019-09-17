@@ -25,11 +25,20 @@ class FormListService implements FormListServiceInterface
 
     public function create(array $data)
     {
+        unset($data['form_format_ids']);
+        $form_list = $this->formListRepository->findFirstByMenuId($data['menu_id'],array('item_order'));
+        if ($form_list){
+            $data['item_order'] = $form_list->item_order + 1;
+        }
+        else{
+            $data['item_order'] = 1;
+        }
         return $this->formListRepository->create($data);
     }
 
     public function update(array $data, $id)
     {
+        unset($data['form_format_ids']);
         return $this->formListRepository->update($data, $id);
     }
 
@@ -75,6 +84,13 @@ class FormListService implements FormListServiceInterface
 
     public function createAttach(array $data,array $form_format_ids)
     {
+        $form_list = $this->formListRepository->findFirstByMenuId($data['menu_id'],array('item_order'));
+        if ($form_list){
+            $data['item_order'] = $form_list->item_order + 1;
+        }
+        else{
+            $data['item_order'] = 1;
+        }
         return $this->formListRepository->createAttach($data,$form_format_ids);
     }
 
