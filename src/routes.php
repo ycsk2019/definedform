@@ -101,4 +101,12 @@ Route::prefix('definedformsrc')->group(function () {
         //    显示列表
         Route::get('showlist', \Lskstc\Definedform\Modules\Definedform\Controllers\FormMenuController::class . '@showlist');
     });
+
+    // 工作流
+    Route::prefix('formworkflow')->group(function () {
+        //    结构图形
+        Route::get('all', \Lskstc\Definedform\Modules\Definedform\Controllers\WorkflowController::class . '@index');
+        //    测试
+        Route::get('test', \Lskstc\Definedform\Modules\Definedform\Controllers\WorkflowController::class . '@test');
+    });
 });

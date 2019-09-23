@@ -6,24 +6,13 @@ class DefinedformServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        /*$this->loadRoutesFrom(__DIR__ . '/routes.php');
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations/');
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                DefinedformInstall::class
-            ]);
-        }
-        $this->publishes([
-            __DIR__.'/config/definedform.php' => config_path('definedform.php'),
-        ], 'config');
-        $this->publishes([
-            __DIR__.'/database/migrations/' => database_path('migrations')
-        ], 'migrations');*/
-
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'workflow');
         $this->commands([
             DefinedformInstall::class,
-            DefinedformDataInstall::class
+            DefinedformDataInstall::class,
+            WorkflowInstall::class,
+            WorkflowDataInstall::class
         ]);
 
         $this->publishes([
@@ -75,7 +64,12 @@ class DefinedformServiceProvider extends ServiceProvider
             __DIR__.'/Modules/Definedform/copy/Controllers/Controller.php' => app_path('Modules/Definedform/Controllers/Controller.php'),
             __DIR__.'/Modules/Definedform/copy/Routes/definedform.php' => base_path('routes/definedform.php'),
             __DIR__.'/Modules/Definedform/copy/Models/FormFormatFormList.php' => app_path('Modules/Definedform/Models/FormFormatFormList.php'),
-            __DIR__.'/Modules/Definedform/copy/Models/FormSystemField.php' => app_path('Modules/Definedform/Models/FormSystemField.php')
+            __DIR__.'/Modules/Definedform/copy/Models/FormSystemField.php' => app_path('Modules/Definedform/Models/FormSystemField.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/ProcessInstance.php' => app_path('Modules/Definedform/Models/ProcessInstance.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/ProcessNode.php' => app_path('Modules/Definedform/Models/ProcessNode.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/ProcessNodeInstance.php' => app_path('Modules/Definedform/Models/ProcessNodeInstance.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/ProcessNodeLink.php' => app_path('Modules/Definedform/Models/ProcessNodeLink.php'),
+            __DIR__ . '/resources/assets' => public_path('vendor/lskstc/definedform'),
         ], 'definedform');
     }
 
