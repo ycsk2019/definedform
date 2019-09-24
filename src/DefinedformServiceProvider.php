@@ -69,6 +69,11 @@ class DefinedformServiceProvider extends ServiceProvider
             __DIR__.'/Modules/Definedform/copy/Models/ProcessNode.php' => app_path('Modules/Definedform/Models/ProcessNode.php'),
             __DIR__.'/Modules/Definedform/copy/Models/ProcessNodeInstance.php' => app_path('Modules/Definedform/Models/ProcessNodeInstance.php'),
             __DIR__.'/Modules/Definedform/copy/Models/ProcessNodeLink.php' => app_path('Modules/Definedform/Models/ProcessNodeLink.php'),
+            __DIR__.'/Modules/Definedform/copy/Models/ProcessTask.php' => app_path('Modules/Definedform/Models/ProcessTask.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/WorkflowRepositoryInterface.php' => app_path('Modules/Definedform/Repositories/WorkflowRepositoryInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Repositories/WorkflowRepository.php' => app_path('Modules/Definedform/Repositories/WorkflowRepository.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/WorkflowServiceInterface.php' => app_path('Modules/Definedform/Services/WorkflowServiceInterface.php'),
+            __DIR__.'/Modules/Definedform/copy/Services/WorkflowService.php' => app_path('Modules/Definedform/Services/WorkflowService.php'),
             __DIR__ . '/resources/assets' => public_path('vendor/lskstc/definedform'),
         ], 'definedform');
     }
@@ -106,5 +111,7 @@ class DefinedformServiceProvider extends ServiceProvider
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormListHeadRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormListHeadRepository::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\OrderServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\OrderService::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\WorkflowServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\WorkflowService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\WorkflowRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\WorkflowRepository::class);
     }
 }

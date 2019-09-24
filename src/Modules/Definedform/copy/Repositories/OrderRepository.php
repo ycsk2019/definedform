@@ -47,7 +47,8 @@ class OrderRepository implements OrderRepositoryInterface
                             DB::commit();
                             $result = array(
                                 'error_no' => 200,
-                                'msg' => '创建成功'
+                                'msg' => '创建成功',
+                                'order_id' => $order->id
                             );
                             return $result;
                         }
@@ -201,7 +202,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function find($id, $columns = ['*'])
     {
-        return Order::with('form_logs')->select($columns)->first();
+        return Order::with('form_logs')->select($columns)->findOrFail($id);
     }
 
     public function findBy($field, $value, $columns = ['*'])
