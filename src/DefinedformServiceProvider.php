@@ -89,6 +89,8 @@ class DefinedformServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Modules\Definedform\Repositories\FormListHeadRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormListHeadRepository::class);
         $this->app->singleton(\App\Modules\Definedform\Services\OrderServiceInterface::class,\App\Modules\Definedform\Services\OrderService::class);
         $this->app->singleton(\App\Modules\Definedform\Repositories\OrderRepositoryInterface::class,\App\Modules\Definedform\Repositories\OrderRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\WorkflowServiceInterface::class,\App\Modules\Definedform\Services\WorkflowService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\WorkflowRepositoryInterface::class,\App\Modules\Definedform\Repositories\WorkflowRepository::class);
 
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormFormatService::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepository::class);
