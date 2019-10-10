@@ -195,7 +195,7 @@ class Workflow extends ServiceProvider
     {
         switch ($node['node_type']) {
             case 'event':              //事件：包括空开始事件、空结束事件、终止结束事件
-                $this->_runEvent($processInstanceId, $node, $data);
+                return $this->_runEvent($processInstanceId, $node, $data);
                 break;
             case 'gateway':             //网关：包括唯一网关、并行网关、包含网关
                 return $this->_runGateway($processInstanceId, $node, $data);
@@ -260,6 +260,15 @@ class Workflow extends ServiceProvider
 //        foreach ($next as $k => $v) {
 //            $this->run($processInstanceId, $this->detail($v->item_id), $data);
 //        }
+        $param                     = [
+            'process_id'          => $node['process_id'],
+            'process_instance_id' => $processInstanceId,
+            'node_id'             => $node['id'],
+            'title'               => $node['title'],
+        ];
+        $nodeInstanceId            = ProcessNodeInstance::insertGetId($param);
+        $param['node_instance_id'] = $nodeInstanceId;
+        return $nodeInstanceId;
     }
 
     /**
