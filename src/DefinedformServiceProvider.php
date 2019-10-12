@@ -96,6 +96,8 @@ class DefinedformServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Modules\Definedform\Repositories\OrderRepositoryInterface::class,\App\Modules\Definedform\Repositories\OrderRepository::class);
         $this->app->singleton(\App\Modules\Definedform\Services\WorkflowServiceInterface::class,\App\Modules\Definedform\Services\WorkflowService::class);
         $this->app->singleton(\App\Modules\Definedform\Repositories\WorkflowRepositoryInterface::class,\App\Modules\Definedform\Repositories\WorkflowRepository::class);
+        $this->app->singleton(\App\Modules\Definedform\Services\FormPresetFieldServiceInterface::class,\App\Modules\Definedform\Services\FormPresetFieldService::class);
+        $this->app->singleton(\App\Modules\Definedform\Repositories\FormPresetFieldRepositoryInterface::class,\App\Modules\Definedform\Repositories\FormPresetFieldRepository::class);
 
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormFormatServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormFormatService::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFormatRepository::class);
@@ -113,5 +115,7 @@ class DefinedformServiceProvider extends ServiceProvider
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\OrderRepository::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\WorkflowServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\WorkflowService::class);
         $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\WorkflowRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\WorkflowRepository::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Services\FormPresetFieldServiceInterface::class,\Lskstc\Definedform\Modules\Definedform\Services\FormPresetFieldService::class);
+        $this->app->singleton(\Lskstc\Definedform\Modules\Definedform\Repositories\FormFieldRepositoryInterface::class,\Lskstc\Definedform\Modules\Definedform\Repositories\FormFieldRepository::class);
     }
 }
